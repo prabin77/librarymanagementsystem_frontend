@@ -46,16 +46,12 @@ const AdminSidebar = () => {
                                 User Manager
                                 <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                             </NavLink>
-                            <NavLink className="nav-link collapsed" to="/admin/order" >
+                            {/* <NavLink className="nav-link collapsed" to="/admin/order" >
                                 <div className="sb-nav-link-icon"><i className="fas fa-shopping-cart"></i></div>
                                 Borrow Detail
                                 <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                            </NavLink>
-                            <NavLink className="nav-link collapsed" to="/admin/transaction" >
-                                <div className="sb-nav-link-icon"><i className="fas fa-dollar-sign"></i></div>
-                                Transaction Manager
-                                <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                            </NavLink>
+                            </NavLink> */}
+                            
                         </div>
                     </div>
                    { loggedInUser? <>

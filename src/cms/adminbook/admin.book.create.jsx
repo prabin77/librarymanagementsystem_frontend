@@ -61,7 +61,7 @@ const AdminBookCreate = () => {
         try {
             
             // setLoading(true)
-            let gen= (data.genres.map((item)=> item.value))
+            let gen= (data.genres.map((item)=> item.value)).join(",")
             data.genres= gen
             console.log(data)
 
@@ -215,6 +215,7 @@ const AdminBookCreate = () => {
                                     required
                                     onChange={(setOpts)=>{
                                         setValue("genres",setOpts)
+                                        console.log(setOpts)
                                     }}
 
                                 />

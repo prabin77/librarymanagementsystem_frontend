@@ -24,11 +24,10 @@ const handleLogout=async (e)=>{
         <>
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
            <FaHome/> Home
-           <NavLink className="navbar-brand ps-3" to="/">
+           <NavLink className="navbar-brand ps-3" to="/admin">
             <FaHome/> Admin Panel
             </NavLink>
            
-           <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
            
            <div className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
               
