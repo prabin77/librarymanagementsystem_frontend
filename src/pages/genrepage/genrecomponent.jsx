@@ -39,7 +39,7 @@ const GenreComponent = () => {
                                               <Col sm={6} md={4}  xl={3} key={index} className="mb-3">
                                                 <Row className="m-2">
                                                     <Card >
-                                                       <NavLink to={"/genre/"+gen.slug}>
+                                                       <NavLink to={"/book/genre/"+gen.slug}>
                                                        
                                                             <img src={import.meta.env.VITE_IMAGE_URL + 'uploads/genre/' + gen.image}
                                                                style={Img} className="card-img m-1" alt="genre image" />

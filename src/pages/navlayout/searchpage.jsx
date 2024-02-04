@@ -1,11 +1,12 @@
-import { Container, Row,Col } from "react-bootstrap";
-import { useSearchParams  } from "react-router-dom";
+import { Container, Row,Col,Card,Badge } from "react-bootstrap";
+import { useSearchParams ,NavLink } from "react-router-dom";
 import { useState ,useCallback , useEffect} from "react";
 import { bookSvc } from "../../cms/adminbook";
 import BookCardComponent from "../bookpage/book-card.component";
  const SearchPage=()=>{
 let[query,setQuery]= useSearchParams();
-let [BookList, setBookList] = useState()
+let [bookList, setBookList] = useState()
+
 
 const fetchBookList = useCallback(async() => {
     try{
@@ -33,14 +34,52 @@ useEffect(() => {
             </Row>
             <Row>
                 {
-                    productList && productList.length >0 ? <>
+                    bookList && bookList.length >0 ? <>
                         {
-                            productList.map((item, key) => (
-                                <Col sm={6} md={3} lg={2} key={key}>
-                                    <BookCardComponent 
-                                        product={item}
-                                    />
-                                </Col>
+                            bookList.map((book, key) => (
+                              <Col sm={2}>
+                              <Card >
+                                <NavLink
+                                  className={"nav-link"}
+                                  to={'/book/'+book.slug}
+                                >
+                                  <Card.Img variant="top" src={import.meta.env.VITE_IMAGE_URL+"/uploads/books/"+book.images[0]} />
+                                </NavLink>
+                                <Card.Body>
+                                  <Card.Title>
+                                    <NavLink
+                                      className={"nav-link"}
+                                      to={'/book/'+book.slug}
+                                    >
+                                      {book.title}
+                                    </NavLink>
+                                  </Card.Title>
+                                  <Card.Text as="div">
+                                    
+                                    {
+                                        (book.genres && book.genres.length > 0) ? book?.genres.map((gen, ind) => (
+                                        <NavLink to={"/genre/"+gen.slug} className={"me-1"} key={ind}>
+                                            <Badge bg="warning">{gen.name}</Badge>
+                                        </NavLink>
+                                        )) : <></>
+                                    }
+                                    
+                                    {
+                                      book.author ?   <NavLink to={"/author/"+book.author.slug}>
+                                      <Badge bg="info">{book.author.name}</Badge>
+                                    </NavLink>
+                                   : <></>
+                                    }
+                                    
+                                    
+                                    
+                                  </Card.Text>
+                                </Card.Body>
+                              </Card>
+                              </Col>  
+                              
+                                
+                                
                             ))
                         }
                     </> : <>

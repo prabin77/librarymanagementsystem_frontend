@@ -6,12 +6,13 @@ class BookService extends HttpService{
             let response = await this.getRequest("v1/book?perPage="+perPage+"&page="+page,{auth:true})
             return response;
         }catch(exception){
+            console.log(exception)
 throw exception
         }
     }
 
     createBook= async (data)=>{
-        
+    
         try{
             let response = await this.postRequest(
                 "v1/book",
@@ -90,10 +91,11 @@ throw exception
         }
 
     }
-    getBookByGenre=  async(genre)=>{
+    getBookByGenre=  async(id)=>{
+       
         try{
             let response = await this.getRequest(
-                "v1/book/"+genre+"/genre"
+                "v1/book/genre/"+id
             ) 
             
 
@@ -114,5 +116,17 @@ throw exception
             throw(exception)
         }
     }
+
+    updateBook=async(data,id)=>{
+        try{ 
+               let response = await this.putRequest("v1/book/"+id,
+               data,
+               {auth:true, file:true}
+               )
+               return response;
+           }catch(exception){
+               throw exception
+           }
+       }
 }
 export default BookService;

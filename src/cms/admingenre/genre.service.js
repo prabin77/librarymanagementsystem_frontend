@@ -57,6 +57,20 @@ updateGenre=async(data,id)=>{
         throw exception
     }
 }
+getGenreBySlug=  async(slug)=>{
+    try{
+        let response = await this.getRequest(
+            "v1/genre/"+slug+"/slug"
+        ) 
+        
+
+        return response.data.data;
+    }catch(exception){
+        console.log(exception)
+        throw exception
+    }
+
+}
 
 }
 export default GenreService

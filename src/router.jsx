@@ -36,7 +36,7 @@ const Routing = () => {
                     <Route path="login" element={<LoginPage/>}></Route>
                     <Route path="genre" element={<GenrePage/>}></Route>
                     <Route path="book" element={<BookPage/>}></Route>
-                    <Route path="genre/:slug" element={<GenreBookPage/>}></Route>
+                    <Route path="book/genre/:slug" element={<GenreBookPage/>}></Route>
                     <Route path="book/:slug" element={<BookDetailPage/>}></Route>
                     <Route path="user" element={<MyProfilePage/>}></Route>
                     <Route path="user/:id" element={<UserEdit/>}></Route>

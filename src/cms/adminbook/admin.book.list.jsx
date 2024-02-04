@@ -89,10 +89,10 @@ return(
                     {bookdata && bookdata.map((data,index)=>(
                         <Row className="mb-3" key={index}>
                             <Col  sm={2}><Card.Title>{data.title}</Card.Title></Col>
-                            <Col sm={1}><Card.Title>{data.quantity}</Card.Title></Col>
+                            <Col sm={2}><Card.Title>{data.quantity}</Card.Title></Col>
                     <Col sm={2}><Card.Title>{data.publishedDate}</Card.Title></Col>
                     <Col sm={2}><Card.Title>{data.publicationDetail}</Card.Title></Col>
-                    <Col sm={1}><Card.Title>{data.status}</Card.Title></Col>
+                    <Col sm={2}><Card.Title>{data.status}</Card.Title></Col>
                     <Col >
                     
                    <NavLink to={"/admin/book/"+data._id}>

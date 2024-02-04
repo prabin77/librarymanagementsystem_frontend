@@ -58,7 +58,7 @@ const HomePage = () => {
                             <Col lg='6'md='7' className="offset-md-3 ">
 
                                 <NavLink to="#">
-                                    <img src="//icms-image.slatic.net/images/ims-web/b9d3240a-31f0-4639-a9a9-db29eb46681a.jpg_1200x1200.jpg"
+                                    <img src="https://img.freepik.com/premium-psd/online-book-store-banner-template_23-2149043284.jpg"
                                         className="img img-fluid" />
                                 </NavLink>
 
@@ -88,7 +88,7 @@ const HomePage = () => {
                             </Row>
                         </div>
                         <Row >
-                            <BookCardComponent />
+                         <BookPage />
                         </Row>
                     </Container>
 

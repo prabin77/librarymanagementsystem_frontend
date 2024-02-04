@@ -4,6 +4,8 @@ import {cardTitle} from "./bookpage"
 import  Pagination from "react-bootstrap/Pagination"
 import { useCallback, useEffect, useState } from "react"
 import { bookSvc } from "../../cms/adminbook"
+import GenreBookPage from "../genrepage/genrebook.page"
+import BookCardComponent from "./book-card.component"
 
 
 const BookDetailPage = () => {
@@ -82,11 +84,11 @@ const BookDetailPage = () => {
 
                         
                         <Row>
-                            <Col sm={4}>
+                            <Col sm={4} >
                         <h4 className="mb-3">Author : </h4>
                             </Col>
                             <Col sm={8}>
-                                <h5> {detail.author}</h5>
+                                <h5> {detail.author?.name}</h5>
                             </Col>
                         </Row>
                         <Row>
@@ -95,16 +97,16 @@ const BookDetailPage = () => {
 
                             </Col>
                             <Col sm={8}>
-                                <h5> {detail.genres}</h5>
-                                
-                            {/* { detail.genres.map((gen,ind)=>
+                               
+                            <Row sm={6}>    
+                            { detail.genres.map((gen,ind)=>
                             (
                                     <NavLink to={"/genre/"+gen.slug} className={"me-1"} key={ind}>
-                                        <Badge bg="warning">{gen.name}</Badge>
+                                        <h5 >{gen.name}</h5>
                                         
                                     </NavLink>
                                     
-                                ))} */}
+                                ))}</Row>
                             </Col>
                         </Row>
                         <Row>
@@ -143,102 +145,8 @@ const BookDetailPage = () => {
                         
                     </div>
                 </Row>
-                <Row >
-                    <Col  sm='6' md='3' lg='2' className=" mb-3">
-                        <Card >
-                            <NavLink to="/book/:bookSlug">
-                                <img src="https://www.nicepng.com/png/detail/895-8959915_please-note-jk-rowling-harry-potter-book-cover.png"
-                                    className="card-img-top" alt="First Category" />
-                            </NavLink>
-
-                            <h5 className=" text-center p-1 " style={cardTitle}> Harry Potter I </h5>
-
-
-                        </Card>
-
-                    </Col>
-                    <Col  sm='6' md='3' lg='2' className=" mb-3">
-                        <Card >
-                            <NavLink to="/book/:bookSlug">
-                                <img src="https://www.nicepng.com/png/detail/895-8959915_please-note-jk-rowling-harry-potter-book-cover.png"
-                                    className="card-img-top" alt="First Category" />
-                            </NavLink>
-
-                            <h5 className=" text-center p-1 " style={cardTitle}> Harry Potter II  </h5>
-
-
-                        </Card>
-
-                    </Col>
-                    <Col  sm='6' md='3' lg='2' className=" mb-3">
-                        <Card >
-                            <NavLink to="/book/:bookSlug">
-                                <img src="https://www.nicepng.com/png/detail/895-8959915_please-note-jk-rowling-harry-potter-book-cover.png"
-                                    className="card-img-top" alt="First Category" />
-                            </NavLink>
-
-                            <h5 className=" text-center p-1 " style={cardTitle}> Harry Potter III  </h5>
-
-
-                        </Card>
-
-                    </Col>
-                    <Col  sm='6' md='3' lg='2' className=" mb-3">
-                        <Card >
-                            <NavLink to="/book/:bookSlug">
-                                <img src="https://www.nicepng.com/png/detail/895-8959915_please-note-jk-rowling-harry-potter-book-cover.png"
-                                    className="card-img-top" alt="First Category" />
-                            </NavLink>
-
-                            <h5 className=" text-center p-1 " style={cardTitle}> Harry Potter IV  </h5>
-
-
-                        </Card>
-
-                    </Col>
-                    <Col  sm='6' md='3' lg='2' className=" mb-3">
-                        <Card >
-                            <NavLink to="/book/:bookSlug">
-                                <img src="https://www.nicepng.com/png/detail/895-8959915_please-note-jk-rowling-harry-potter-book-cover.png"
-                                    className="card-img-top" alt="First Category" />
-                            </NavLink>
-
-                            <h5 className=" text-center p-1 " style={cardTitle}>Harry Potter V </h5>
-
-
-                        </Card>
-
-                    </Col>
-                    <Col  sm='6' md='3' lg='2' className=" mb-3">
-                        <Card >
-                            <NavLink to="/book/:bookSlug">
-                                <img src="https://www.nicepng.com/png/detail/895-8959915_please-note-jk-rowling-harry-potter-book-cover.png"
-                                    className="card-img-top" alt="First Category" />
-                            </NavLink>
-
-                            <h5 className=" text-center p-1 " style={cardTitle}> Harry Potter VI  </h5>
-
-
-                        </Card>
-
-                    </Col>
-                    <Col  sm='6' md='3' lg='2' className=" mb-3">
-                        <Card >
-                            <NavLink to="/book/:bookSlug">
-                                <img src="https://www.nicepng.com/png/detail/895-8959915_please-note-jk-rowling-harry-potter-book-cover.png"
-                                    className="card-img-top" alt="First Category" />
-                            </NavLink>
-
-                            <h5 className=" text-center p-1 " style={cardTitle}> Harry Potter VI  </h5>
-
-
-                        </Card>
-
-                    </Col>
-                   
-                    
-
-                </Row>
+                <BookCardComponent/>
+               
             </Container>
                         </>:<p className="text-danger h4">Book does not exists</p>
                      }

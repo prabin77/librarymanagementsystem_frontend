@@ -1,5 +1,5 @@
 import { useState ,useEffect} from "react";
-import { Card,Form,Row,Col,Button } from "react-bootstrap";
+import { Card,Form,Row,Col,Button, Carousel } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import *as Yup from "yup"
 import { useForm } from "react-hook-form";
@@ -19,13 +19,14 @@ const AdminBookEdit= ()=>{
     const navigate= useNavigate()
     const params = useParams()
 
+     console.log(detail)
     const bookUpdateSchema= Yup.object({
         title: Yup.string().required(),
         quantity: Yup.string().nullable(),
         publishedDate: Yup.string().required(),
         publicationDetail: Yup.string().required(),
         author: Yup.string().nullable(),
-        genre: Yup.array().required(),
+        genres: Yup.array().required(),
     
         status: Yup.string().matches(/active|inactive/).default("active")
     
@@ -64,9 +65,9 @@ const AdminBookEdit= ()=>{
 
     const onSubmit = async (data) => {
         try {
-            
+            console.log(data)
             setLoading(true)
-           let gen= (data.genre.map((item)=> item.value)).join(",")
+           let gen= (data.genres.map((item)=> item.value)).join(",")
             data.genres=gen
 
              let formData = new FormData()
@@ -82,7 +83,7 @@ const AdminBookEdit= ()=>{
                 }
              })
 
-                let response = await bookSvc.updatBook(formData,params.id)
+                let response = await bookSvc.updateBook(formData,params.id)
                 toast.success(response.data?.msg)
                 navigate("/admin/book")
           
@@ -126,24 +127,26 @@ const AdminBookEdit= ()=>{
 
             let response = await bookSvc.getBookById(params.id)
             let book=response.data.data
-            console .log(book)
+           
             setValue("title",book.title)
             setValue("status",book.status)
             setValue("author",book.author)
             setValue("quantity",book.quantity)
             setValue("publicationDetail",book.publicationDetail)
             setValue("publishedDate",book.publishedDate)
-            // let selGen= book.genre.map((gen)=>{
-            //     return{
-            //         label:gen.title,
-            //         value:gen._id
-            //     }
-            // })
-            setValue("genres",book.genres)
+            let selGen= book.genres.map((gen)=>{
+    
+                return{
+                    
+                    label:gen.name,
+                    value:gen._id
+                }
+            })
+            setValue("genres",selGen)
 
             setDetail({
                 ...book,
-                genre
+                genres: selGen
             })
         }catch(exception){
             console.log(exception)
@@ -213,7 +216,7 @@ const AdminBookEdit= ()=>{
                             <Col sm={8}>
                                
 
-                                <Form.Select  size="sm"{...register("author",{required:false})}>
+                                <Form.Select  size="sm"{...register("author")} value={detail?.author._id}>
                         <option value="">--select one--</option>
                         {
                             listOfAuthors && listOfAuthors.map((aut,i)=>(
@@ -237,20 +240,20 @@ const AdminBookEdit= ()=>{
                                 <Select
 
                                     isMulti
-                                    name="genres"
                                    options={listOfGenres}
                                     className="basic-multi-select"
                                     classNamePrefix="select"
-                                    defaultValue={getValues('genres')}
-                                    onChange={(setOpts)=>{
-                                        setValue("genres",setOpts)
+                                    required
+                                    defaultValue={detail?.genres}
+                                    onChange={(selOpts)=>{
+                                        setValue("genres",selOpts)
                                     }}
 
                                 />
 
                                 <span className="text-danger">
                                     {
-                                        (errors && errors.genre?.message) ? errors.genre.message : ""
+                                        (errors && errors.genres?.message) ? errors.genres.message : ""
                                     }
                                 </span>
 
@@ -325,12 +328,20 @@ const AdminBookEdit= ()=>{
                                 </span>
                             </Col>
                             <Col sm={3}>
-                            {
-                                detail && detail.images?
-                                <img src={import.meta.env.VITE_IMAGE_URL+"/uploads/books/"+detail.images}
-                                className="img img-fluid"/>
-                                :<></>
-                            }
+                            <Carousel>
+                           { 
+                            detail?.images && detail.images.map((img,index)=>(
+
+                          <Carousel.Item key={index}>
+                                <img src={import.meta.env.VITE_IMAGE_URL+'uploads/books/'+img}
+                               className="card-img-top img img-fluid"  />
+                          </Carousel.Item>
+                           ))
+                          
+}
+
+                            </Carousel>
+                            
                             </Col>
                         </Form.Group>
 
